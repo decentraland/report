@@ -1,14 +1,14 @@
 {
-  "name": "@dcl/{{project_name}}-site",
+  "name": "@dcl/report-site",
   "version": "0.0.1",
-  "description": "Starter template for Decentraland dApps Repositories",
+  "description": "UI for Decentraland players to report other players",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/decentraland/dapps-template.git"
+    "url": "git+https://github.com/decentraland/report.git"
   },
   "keywords": [
     "decentraland",
@@ -16,5 +16,5 @@
   ],
   "author": "Decentraland",
   "license": "Apache-2.0",
-  "homepage": ""
+  "homepage": "https://github.com/decentraland/report#readme"
 }

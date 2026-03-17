@@ -1,10 +1,8 @@
-# {{project_name}} UI
+# Report UI
 
-[![Coverage Status](https://coveralls.io/repos/github/{org-name}/{repo-name}/badge.svg?branch=main)](https://coveralls.io/github/{org-name}/{repo-name}?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/decentraland/report/badge.svg?branch=main)](https://coveralls.io/github/decentraland/report?branch=main)
 
-<!-- A brief description of the purpose of this UI -->
-
-This UI displays A and B using the external services X and Y.
+A UI that allows Decentraland players to report other players. Players must be authenticated via their Decentraland wallet to verify their identity before submitting a report.
 
 ## Table of Contents
 
@@ -17,18 +15,15 @@ This UI displays A and B using the external services X and Y.
   - [Running the UI](#running-the-ui)
 - [Testing](#testing)
 
-<!-- List of features the server has -->
-
-- **Feature 1**: Provides Y functionality to the users.
+- **Player Reporting**: Allows authenticated Decentraland players to report other players for rule violations or misconduct.
+- **Authentication**: Requires players to authenticate with their Decentraland wallet to verify identity before submitting a report.
 
 ## Dependencies & Related Services
 
-<!-- List any services this server depends on or interacts with -->
-
 This service interacts with the following services:
 
-- **[Service Name 1](link-to-service-repo)**: Description of interaction
-- **[Service Name 2](link-to-service-repo)**: Description of interaction
+- **[Decentraland Auth](https://github.com/decentraland/auth)**: Player authentication and identity verification
+- **Intercom API**: Report submission and moderation management
 
 ## Getting Started
 
@@ -46,8 +41,8 @@ Before running this service, ensure you have the following installed:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/{org-name}/{repo-name}.git
-cd {repo-name}
+git clone https://github.com/decentraland/report.git
+cd report
 ```
 
 2. Install dependencies:
