@@ -1,21 +1,17 @@
 enum ReportReason {
+  SCAM_PHISHING = 'scam_phishing',
+  ILLEGAL_CONTENT = 'illegal_content',
   HARASSMENT = 'harassment',
-  HATE_SPEECH = 'hate_speech',
-  SPAM = 'spam',
-  IMPERSONATION = 'impersonation',
-  INAPPROPRIATE_CONTENT = 'inappropriate_content',
   CHEATING = 'cheating',
-  OTHER = 'other'
+  IMPERSONATION = 'impersonation'
 }
 
 const REPORT_REASON_LABELS: Record<ReportReason, string> = {
-  [ReportReason.HARASSMENT]: 'Harassment or Abuse',
-  [ReportReason.HATE_SPEECH]: 'Hate Speech',
-  [ReportReason.SPAM]: 'Spam',
-  [ReportReason.IMPERSONATION]: 'Impersonation',
-  [ReportReason.INAPPROPRIATE_CONTENT]: 'Inappropriate Content',
+  [ReportReason.SCAM_PHISHING]: 'Scam/Phishing',
+  [ReportReason.ILLEGAL_CONTENT]: 'Illegal Content',
+  [ReportReason.HARASSMENT]: 'Harassment',
   [ReportReason.CHEATING]: 'Cheating',
-  [ReportReason.OTHER]: 'Other'
+  [ReportReason.IMPERSONATION]: 'Impersonation'
 }
 
 import type { UploadedFile } from '../../components/FileUpload'
