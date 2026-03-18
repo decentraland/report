@@ -16,7 +16,7 @@ HTTP REST API calls to Decentraland backend services for authentication and repo
 
 **Technology Stack:**
 
-- Runtime: Node.js 22+
+- Runtime: Node.js 20+
 - Language: TypeScript
 - UI Framework: React 18
 - Build Tool: Vite
