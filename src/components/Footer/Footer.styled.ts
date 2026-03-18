@@ -1,0 +1,7 @@
+import { Box, styled } from 'decentraland-ui2'
+
+const FooterWrapper = styled(Box)({
+  padding: 0
+})
+
+export { FooterWrapper }

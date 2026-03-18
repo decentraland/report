@@ -8,6 +8,25 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     plugins: [react()],
-    ...(command === 'build' ? { base: envVariables.VITE_BASE_URL } : undefined)
+    build: {
+      commonjsOptions: {
+        transformMixedEsModules: true,
+        include: [/node_modules/]
+      }
+    },
+    optimizeDeps: {
+      include: ['decentraland-ui2', '@dcl/ui-env', '@dcl/hooks']
+    },
+    ...(command === 'build' ? { base: envVariables.VITE_BASE_URL } : undefined),
+    server: {
+      proxy: {
+        '/auth': {
+          target: 'https://decentraland.zone',
+          changeOrigin: true,
+          secure: false,
+          ws: true
+        }
+      }
+    }
   }
 })
