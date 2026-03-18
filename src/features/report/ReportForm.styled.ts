@@ -2,7 +2,7 @@ import { Box, Button, Checkbox, FormControlLabel, Typography, styled } from 'dec
 
 const FormBackground = styled(Box)(({ theme }) => ({
   width: '100%',
-  minHeight: '100%',
+  flex: 1,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

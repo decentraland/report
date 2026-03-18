@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useWallet } from '@dcl/core-web3'
 import { EthAddress } from '@dcl/schemas'
 import { FormControl, InputLabel, Logo, MenuItem, Select, TextField, Typography } from 'decentraland-ui2'
 import { FileUpload } from '../../components/FileUpload'
 import { FieldHelper, FieldWrapper, FormField } from '../../components/FormField'
+import { useSubmitReport } from './useSubmitReport'
 import { REPORT_REASON_LABELS, ReportReason } from './ReportForm.types'
 import type { ReportFormErrors, ReportFormState, UploadedFile } from './ReportForm.types'
 import {
@@ -21,6 +22,7 @@ import {
 
 function ReportForm() {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   const { address } = useWallet()
 
   const playerAddressParam = searchParams.get('player_address') ?? ''
@@ -39,6 +41,7 @@ function ReportForm() {
   })
 
   const [submitted, setSubmitted] = useState(false)
+  const { submitReport, isSubmitting, error: submitError } = useSubmitReport()
 
   useEffect(() => {
     setFormState(prev => ({ ...prev, playerAddress: walletAddress }))
@@ -73,11 +76,14 @@ function ReportForm() {
     [handleFieldChange]
   )
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     setSubmitted(true)
     if (hasErrors || walletMismatch) return
-    console.log('Report submitted:', formState)
-  }, [hasErrors, walletMismatch, formState])
+    const success = await submitReport(formState)
+    if (success) {
+      navigate('/success')
+    }
+  }, [hasErrors, walletMismatch, formState, submitReport, navigate])
 
   return (
     <FormBackground>
@@ -203,9 +209,20 @@ function ReportForm() {
           )}
         </FieldWrapper>
 
+        {submitError && (
+          <Typography variant="body2" color="error">
+            {submitError}
+          </Typography>
+        )}
+
         {/* Submit Button */}
-        <SubmitButton onClick={handleSubmit} variant="contained" color="primary" disabled={walletMismatch || !formState.confirmAccuracy}>
-          Submit Report
+        <SubmitButton
+          onClick={handleSubmit}
+          variant="contained"
+          color="primary"
+          disabled={walletMismatch || !formState.confirmAccuracy || isSubmitting}
+        >
+          {isSubmitting ? 'Submitting...' : 'Submit Report'}
         </SubmitButton>
       </FormCard>
 
