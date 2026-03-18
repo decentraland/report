@@ -1,11 +1,7 @@
-import { Box, Typography } from 'decentraland-ui2'
+import { ReportForm } from './features/report/ReportForm'
 
 function App() {
-  return (
-    <Box sx={{ padding: 4 }}>
-      <Typography variant="h4">Decentraland Report</Typography>
-    </Box>
-  )
+  return <ReportForm />
 }
 
 export { App }
