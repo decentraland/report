@@ -31,8 +31,7 @@ This service interacts with the following services:
 
 Before running this service, ensure you have the following installed:
 
-- **Node.js**: Version 22.x or higher (LTS recommended)
-- **Yarn**: Version 1.22.x or higher
+- **Node.js**: Version 24.x or higher
 
 <!-- List any other dependencies that are required to run the UI -->
 

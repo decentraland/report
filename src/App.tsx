@@ -1,9 +1,9 @@
 import { Box, Typography } from 'decentraland-ui2'
 
-const App = () => {
+function App() {
   return (
-    <Box>
-      <Typography variant="h4">This is a Decentraland dApps template</Typography>
+    <Box sx={{ padding: 4 }}>
+      <Typography variant="h4">Decentraland Report</Typography>
     </Box>
   )
 }

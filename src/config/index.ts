@@ -3,7 +3,7 @@ import dev from './env/dev.json'
 import prod from './env/prd.json'
 import stg from './env/stg.json'
 
-export const config = createConfig(
+const config = createConfig(
   {
     [Env.DEVELOPMENT as string]: dev,
     [Env.STAGING as string]: stg,
@@ -12,7 +12,13 @@ export const config = createConfig(
   {
     systemEnvVariables: {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      REACT_APP_DCL_DEFAULT_ENV: process.env.VITE_REACT_APP_DCL_DEFAULT_ENV ?? 'dev'
+      REACT_APP_DCL_DEFAULT_ENV: import.meta.env.VITE_REACT_APP_DCL_DEFAULT_ENV ?? 'dev'
     }
   }
 )
+
+const getEnv = (key: string): string | undefined => {
+  return config.get(key)
+}
+
+export { config, getEnv }

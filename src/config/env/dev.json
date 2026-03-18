@@ -1,1 +1,12 @@
-{}
+{
+  "AUTH_URL": "/auth",
+  "CHAIN_ID": "11155111",
+  "NETWORK": "sepolia",
+  "MAGIC_API_KEY": "pk_live_CE856A4938B36648",
+  "WALLET_CONNECT_PROJECT_ID": "61570c542c2d66c659492e5b24a41522",
+  "CATALYST_LAMBDAS_URL": "https://peer.decentraland.zone/lambdas",
+  "PEER_URL": "https://peer.decentraland.zone",
+  "MANA_TOKEN_ADDRESS_ETHEREUM": "0xfa04d2e2ba9aec166c93dfeeba7427b2303befa9",
+  "MANA_TOKEN_ADDRESS_MATIC": "0x7ad72b9f944ea9793cf4055d88f81138cc2c63a0",
+  "SEGMENT_API_KEY": ""
+}
