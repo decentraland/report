@@ -2,12 +2,22 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useWallet } from '@dcl/core-web3'
 import { EthAddress } from '@dcl/schemas'
-import { Checkbox, FormControl, FormControlLabel, InputLabel, Logo, MenuItem, Select, TextField, Typography } from 'decentraland-ui2'
+import { FormControl, InputLabel, Logo, MenuItem, Select, TextField, Typography } from 'decentraland-ui2'
 import { FileUpload } from '../../components/FileUpload'
 import { FieldHelper, FieldWrapper, FormField } from '../../components/FormField'
 import { REPORT_REASON_LABELS, ReportReason } from './ReportForm.types'
 import type { ReportFormErrors, ReportFormState, UploadedFile } from './ReportForm.types'
-import { FooterText, FormBackground, FormCard, FormTitle, LogoWrapper, SubmitButton, WalletMismatchAlert } from './ReportForm.styled'
+import {
+  ConfirmCheckbox,
+  ConfirmLabel,
+  FooterText,
+  FormBackground,
+  FormCard,
+  FormTitle,
+  LogoWrapper,
+  SubmitButton,
+  WalletMismatchAlert
+} from './ReportForm.styled'
 
 function ReportForm() {
   const [searchParams] = useSearchParams()
@@ -176,17 +186,15 @@ function ReportForm() {
 
         {/* Confirmation Checkbox */}
         <FieldWrapper>
-          <FormControlLabel
+          <ConfirmLabel
             control={
-              <Checkbox
+              <ConfirmCheckbox
                 checked={formState.confirmAccuracy}
                 onChange={e => handleFieldChange('confirmAccuracy', e.target.checked)}
-                sx={submitted && errors.confirmAccuracy ? { color: 'error.main' } : undefined}
+                showError={submitted && !!errors.confirmAccuracy}
               />
             }
             label="I confirm this report is accurate."
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            sx={{ '& .MuiTypography-root': { fontSize: '0.875rem' } }}
           />
           {submitted && errors.confirmAccuracy && (
             <Typography variant="caption" color="error">

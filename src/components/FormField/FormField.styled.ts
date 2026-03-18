@@ -1,14 +1,12 @@
 import { Box, Typography, styled } from 'decentraland-ui2'
 
-const FieldWrapper = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '6px'
-})
+const FieldHelper = styled(Typography)(({ theme }) => ({
+  ...theme.typography.caption,
+  color: theme.palette.text.secondary
+}))
 
 const FieldLabel = styled(Typography)(({ theme }) => ({
-  fontWeight: 600,
-  fontSize: '0.875rem',
+  ...theme.typography.subtitle2,
   display: 'flex',
   alignItems: 'center',
   gap: theme.spacing(0.5),
@@ -18,9 +16,10 @@ const FieldLabel = styled(Typography)(({ theme }) => ({
   }
 }))
 
-const FieldHelper = styled(Typography)(({ theme }) => ({
-  fontSize: '0.75rem',
-  color: theme.palette.text.secondary
+const FieldWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(1.5)
 }))
 
 export { FieldHelper, FieldLabel, FieldWrapper }

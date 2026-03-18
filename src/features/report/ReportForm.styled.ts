@@ -1,6 +1,6 @@
-import { Box, Button, Typography, styled } from 'decentraland-ui2'
+import { Box, Button, Checkbox, FormControlLabel, Typography, styled } from 'decentraland-ui2'
 
-const FormBackground = styled(Box)({
+const FormBackground = styled(Box)(({ theme }) => ({
   width: '100%',
   minHeight: '100%',
   display: 'flex',
@@ -10,8 +10,8 @@ const FormBackground = styled(Box)({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
-  padding: '48px 16px'
-})
+  padding: theme.spacing(12, 4)
+}))
 
 const FormCard = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(22, 7, 35, 0.92)',
@@ -26,11 +26,11 @@ const FormCard = styled(Box)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(255, 255, 255, 0.15)'
+      borderColor: theme.palette.action.hover
     },
     // eslint-disable-next-line @typescript-eslint/naming-convention
     '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(255, 255, 255, 0.3)'
+      borderColor: theme.palette.action.selected
     },
     // eslint-disable-next-line @typescript-eslint/naming-convention
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
@@ -39,30 +39,14 @@ const FormCard = styled(Box)(({ theme }) => ({
   }
 }))
 
-const LogoWrapper = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '16px'
-})
-
-const FormTitle = styled(Typography)({
-  fontWeight: 700,
-  textAlign: 'center'
-})
-
-const SubmitButton = styled(Button)({
-  alignSelf: 'flex-start'
-})
-
 const FooterText = styled(Typography)(({ theme }) => ({
-  fontSize: '0.75rem',
+  ...theme.typography.caption,
   color: theme.palette.text.secondary,
   textAlign: 'center',
   marginTop: theme.spacing(2),
   // eslint-disable-next-line @typescript-eslint/naming-convention
   '& a': {
-    color: '#FF2D55',
+    color: theme.palette.primary.main,
     textDecoration: 'none',
     // eslint-disable-next-line @typescript-eslint/naming-convention
     '&:hover': {
@@ -71,13 +55,40 @@ const FooterText = styled(Typography)(({ theme }) => ({
   }
 }))
 
+const FormTitle = styled(Typography)({
+  fontWeight: 700,
+  textAlign: 'center'
+})
+
+const LogoWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: theme.spacing(4)
+}))
+
+const SubmitButton = styled(Button)({
+  alignSelf: 'flex-start'
+})
+
 const WalletMismatchAlert = styled(Box)(({ theme }) => ({
-  backgroundColor: 'rgba(255, 45, 85, 0.1)',
+  backgroundColor: 'rgba(251, 59, 59, 0.16)',
   border: `1px solid ${theme.palette.error.main}`,
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(1.5, 2),
   color: theme.palette.error.main,
-  fontSize: '0.8125rem'
+  ...theme.typography.body2
 }))
 
-export { FooterText, FormBackground, FormCard, FormTitle, LogoWrapper, SubmitButton, WalletMismatchAlert }
+const ConfirmCheckbox = styled(Checkbox)<{ showError: boolean }>(({ theme, showError }) => ({
+  color: showError ? theme.palette.error.main : undefined
+}))
+
+const ConfirmLabel = styled(FormControlLabel)(({ theme }) => ({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '& .MuiTypography-root': {
+    ...theme.typography.body2
+  }
+}))
+
+export { ConfirmCheckbox, ConfirmLabel, FooterText, FormBackground, FormCard, FormTitle, LogoWrapper, SubmitButton, WalletMismatchAlert }
