@@ -17,8 +17,8 @@ const REPORT_REASON_LABELS: Record<ReportReason, string> = {
 import type { UploadedFile } from '../../components/FileUpload'
 
 interface ReportFormState {
-  walletAddress: string
-  reportedWallet: string
+  playerAddress: string
+  reportedAddress: string
   reason: ReportReason | ''
   description: string
   evidence: UploadedFile[]
@@ -27,8 +27,8 @@ interface ReportFormState {
 }
 
 interface ReportFormErrors {
-  walletAddress: string
-  reportedWallet: string
+  playerAddress: string
+  reportedAddress: string
   reason: string
   description: string
   evidence: string

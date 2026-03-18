@@ -23,14 +23,14 @@ function ReportForm() {
   const [searchParams] = useSearchParams()
   const { address } = useWallet()
 
-  const playerAddress = searchParams.get('player_address') ?? ''
-  const reportedAddress = searchParams.get('reported_address') ?? ''
+  const playerAddressParam = searchParams.get('player_address') ?? ''
+  const reportedAddressParam = searchParams.get('reported_address') ?? ''
 
   const walletAddress = address ?? ''
 
   const [formState, setFormState] = useState<ReportFormState>({
-    walletAddress: walletAddress,
-    reportedWallet: reportedAddress,
+    playerAddress: walletAddress,
+    reportedAddress: reportedAddressParam,
     reason: '',
     description: '',
     evidence: [],
@@ -41,18 +41,18 @@ function ReportForm() {
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    setFormState(prev => ({ ...prev, walletAddress: walletAddress }))
+    setFormState(prev => ({ ...prev, playerAddress: walletAddress }))
   }, [walletAddress])
 
   const walletMismatch = useMemo(() => {
-    if (!address || !playerAddress) return false
-    return address.toLowerCase() !== playerAddress.toLowerCase()
-  }, [address, playerAddress])
+    if (!address || !playerAddressParam) return false
+    return address.toLowerCase() !== playerAddressParam.toLowerCase()
+  }, [address, playerAddressParam])
 
   const errors = useMemo<ReportFormErrors>(() => {
     return {
-      walletAddress: !EthAddress.validate(formState.walletAddress) ? 'Please enter a valid wallet address' : '',
-      reportedWallet: !EthAddress.validate(formState.reportedWallet) ? 'Please enter a valid wallet address' : '',
+      playerAddress: !EthAddress.validate(formState.playerAddress) ? 'Please enter a valid wallet address' : '',
+      reportedAddress: !EthAddress.validate(formState.reportedAddress) ? 'Please enter a valid wallet address' : '',
       reason: !formState.reason ? 'Please choose a reason' : '',
       description: !formState.description.trim() ? 'Please include a description of your report' : '',
       evidence: formState.evidence.length === 0 ? 'Please upload the evidence of your issue' : '',
@@ -98,9 +98,9 @@ function ReportForm() {
           label="Your Wallet Address"
           required
           helper="Reports are tied to your wallet to prevent abuse. Your identity will not be publicly shared."
-          error={submitted ? errors.walletAddress : undefined}
+          error={submitted ? errors.playerAddress : undefined}
         >
-          <TextField fullWidth size="small" placeholder="Write or paste your address here..." value={formState.walletAddress} disabled />
+          <TextField fullWidth size="small" placeholder="Write or paste your address here..." value={formState.playerAddress} disabled />
         </FormField>
 
         <FormField
@@ -108,15 +108,15 @@ function ReportForm() {
           label="Reported User Wallet"
           required
           helper="This is the wallet address of the user you are reporting."
-          error={submitted ? errors.reportedWallet : undefined}
+          error={submitted ? errors.reportedAddress : undefined}
         >
           <TextField
             fullWidth
             size="small"
             placeholder="Write or paste an address here..."
-            value={formState.reportedWallet}
-            onChange={e => handleFieldChange('reportedWallet', e.target.value)}
-            disabled={!!reportedAddress}
+            value={formState.reportedAddress}
+            onChange={e => handleFieldChange('reportedAddress', e.target.value)}
+            disabled={!!reportedAddressParam}
           />
         </FormField>
 
