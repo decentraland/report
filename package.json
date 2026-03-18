@@ -39,14 +39,6 @@
     "viem": "2.41.2",
     "wagmi": "2.19.5"
   },
-  "overrides": {
-    "@types/node": "20.8.3",
-    "@walletconnect/logger": {
-      "pino": "10.0.0"
-    },
-    "react-redux": "$react-redux",
-    "redux": "$redux"
-  },
   "devDependencies": {
     "@dcl/eslint-config": "^3.1.0",
     "@types/jest": "29.5.12",
@@ -91,5 +83,13 @@
   "engines": {
     "node": ">=20",
     "npm": ">=8"
+  },
+  "overrides": {
+    "@types/node": "20.8.3",
+    "@walletconnect/logger": {
+      "pino": "10.0.0"
+    },
+    "react-redux": "$react-redux",
+    "redux": "$redux"
   }
 }
