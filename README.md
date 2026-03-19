@@ -1,4 +1,4 @@
-# Report UI
+# Report
 
 [![Coverage Status](https://coveralls.io/repos/github/decentraland/report/badge.svg?branch=main)](https://coveralls.io/github/decentraland/report?branch=main)
 
