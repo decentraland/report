@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { App } from './App'
 import { PageLayout } from './components/PageLayout/PageLayout'
+import { ReportSuccess } from './features/report/ReportSuccess'
 
 function AppRoutes() {
   return (
@@ -10,6 +11,14 @@ function AppRoutes() {
         element={
           <PageLayout>
             <App />
+          </PageLayout>
+        }
+      />
+      <Route
+        path="/success"
+        element={
+          <PageLayout>
+            <ReportSuccess />
           </PageLayout>
         }
       />
