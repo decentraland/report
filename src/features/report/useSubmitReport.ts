@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { signedFetchFactory } from 'decentraland-crypto-fetch'
 import { getEnv } from '../../config'
 import { useAuthIdentity } from '../../hooks/useAuthIdentity'
-import type { ReportFormState } from './ReportForm.types'
+import { REPORT_REASON_LABELS, type ReportFormState } from './ReportForm.types'
 
 type UseSubmitReportResult = {
   submitReport: (formState: ReportFormState) => Promise<boolean>
@@ -27,7 +27,7 @@ function useSubmitReport(): UseSubmitReportResult {
         const formData = new FormData()
         formData.append('playerAddress', formState.playerAddress)
         formData.append('reportedAddress', formState.reportedAddress)
-        formData.append('reason', formState.reason)
+        formData.append('reason', formState.reason ? REPORT_REASON_LABELS[formState.reason] : '')
         formData.append('description', formState.description)
         formData.append('additionalComments', formState.additionalComments)
         formData.append('confirmAccuracy', String(formState.confirmAccuracy))
