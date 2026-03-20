@@ -10,6 +10,7 @@ import { getEnv } from './config'
 import { web3Config } from './features/web3/web3.config'
 import en from './intl/en.json'
 import { AppRoutes } from './Routes'
+import { getBasename } from './utils/authRedirect'
 
 const segmentWriteKey = getEnv('SEGMENT_API_KEY') || ''
 
@@ -21,7 +22,7 @@ createRoot(document.getElementById('root')!).render(
           <DclThemeProvider theme={darkTheme}>
             <AnalyticsProvider writeKey={segmentWriteKey}>
               <TranslationProvider locale="en" translations={{ en }} fallbackLocale="en">
-                <BrowserRouter basename="/">
+                <BrowserRouter basename={getBasename() || '/'}>
                   <AppRoutes />
                 </BrowserRouter>
               </TranslationProvider>
