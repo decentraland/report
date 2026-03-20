@@ -3,10 +3,10 @@ import { getEnv } from '../config'
 
 /**
  * Gets the basename for this dApp.
- * Returns empty string since report.decentraland.org is at root (subdomain-based hosting).
+ * Returns '/report' on Decentraland production domains, empty string elsewhere (localhost, Vercel previews).
  */
 function getBasename(): string {
-  return ''
+  return /^decentraland.(zone|org|today)$/.test(window.location.host) ? '/report' : ''
 }
 
 /**
