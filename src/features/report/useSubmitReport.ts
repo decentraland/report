@@ -21,6 +21,10 @@ function useSubmitReport(): UseSubmitReportResult {
       setError(null)
 
       try {
+        if (!identity) {
+          throw new Error('You must be authenticated to submit a report')
+        }
+
         const signedFetch = signedFetchFactory()
         const reportApiUrl = getEnv('REPORT_API_URL')
 

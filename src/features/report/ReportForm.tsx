@@ -81,7 +81,7 @@ function ReportForm() {
     if (hasErrors || walletMismatch) return
     const success = await submitReport(formState)
     if (success) {
-      navigate('/success')
+      navigate('/success', { state: { submitted: true } })
     }
   }, [hasErrors, walletMismatch, formState, submitReport, navigate])
 
