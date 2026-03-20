@@ -63,7 +63,6 @@ function useSubmitReport(): UseSubmitReportResult {
             const evidence = formState.evidence[index]
             const uploadHeaders = new Headers()
             uploadHeaders.set('Content-Type', evidence.file.type)
-            uploadHeaders.set('Content-Length', String(evidence.size))
             return fetch(presignedFile.uploadUrl, {
               method: 'PUT',
               headers: uploadHeaders,
@@ -78,6 +77,7 @@ function useSubmitReport(): UseSubmitReportResult {
 
         // Step 3: Submit the report with evidence keys
         const reportBody = {
+          reportId: presignData.reportId,
           playerAddress: formState.playerAddress,
           reportedAddress: formState.reportedAddress,
           reason: formState.reason ? REPORT_REASON_LABELS[formState.reason] : '',
