@@ -4,6 +4,10 @@ import { getEnv } from '../../config'
 import { useAuthIdentity } from '../../hooks/useAuthIdentity'
 import { REPORT_REASON_LABELS, type ReportFormState } from './ReportForm.types'
 
+type PresignFile = { filename: string; contentType: string; fileSize: number }
+type PresignResponseFile = { uploadUrl: string; key: string; publicUrl: string }
+type PresignResponse = { reportId: string; files: PresignResponseFile[] }
+
 type UseSubmitReportResult = {
   submitReport: (formState: ReportFormState) => Promise<boolean>
   isSubmitting: boolean
@@ -28,20 +32,65 @@ function useSubmitReport(): UseSubmitReportResult {
         const signedFetch = signedFetchFactory()
         const reportApiUrl = getEnv('REPORT_API_URL')
 
-        const formData = new FormData()
-        formData.append('playerAddress', formState.playerAddress)
-        formData.append('reportedAddress', formState.reportedAddress)
-        formData.append('reason', formState.reason ? REPORT_REASON_LABELS[formState.reason] : '')
-        formData.append('description', formState.description)
-        formData.append('additionalComments', formState.additionalComments)
-        formData.append('confirmAccuracy', String(formState.confirmAccuracy))
-        for (const evidence of formState.evidence) {
-          formData.append('evidence', evidence.file)
+        // Step 1: Get presigned URLs
+        const presignBody: { files: PresignFile[] } = {
+          files: formState.evidence.map(evidence => ({
+            filename: evidence.name,
+            contentType: evidence.file.type,
+            fileSize: evidence.size
+          }))
+        }
+
+        const jsonHeaders = new Headers()
+        jsonHeaders.set('Content-Type', 'application/json')
+
+        const presignResponse = await signedFetch(`${reportApiUrl}/api/reports/players/presign`, {
+          method: 'POST',
+          headers: jsonHeaders,
+          body: JSON.stringify(presignBody),
+          identity
+        })
+
+        if (!presignResponse.ok) {
+          throw new Error(`Failed to get upload URLs (${presignResponse.status})`)
+        }
+
+        const presignData: PresignResponse = await presignResponse.json()
+
+        // Step 2: Upload files directly to S3
+        await Promise.all(
+          presignData.files.map((presignedFile, index) => {
+            const evidence = formState.evidence[index]
+            const uploadHeaders = new Headers()
+            uploadHeaders.set('Content-Type', evidence.file.type)
+            uploadHeaders.set('Content-Length', String(evidence.size))
+            return fetch(presignedFile.uploadUrl, {
+              method: 'PUT',
+              headers: uploadHeaders,
+              body: evidence.file
+            }).then(res => {
+              if (!res.ok) {
+                throw new Error(`Failed to upload ${evidence.name} (${res.status})`)
+              }
+            })
+          })
+        )
+
+        // Step 3: Submit the report with evidence keys
+        const reportBody = {
+          playerAddress: formState.playerAddress,
+          reportedAddress: formState.reportedAddress,
+          reason: formState.reason ? REPORT_REASON_LABELS[formState.reason] : '',
+          description: formState.description,
+          additionalComments: formState.additionalComments,
+          confirmAccuracy: formState.confirmAccuracy,
+          evidenceKeys: presignData.files.map(f => f.key)
         }
 
         const response = await signedFetch(`${reportApiUrl}/api/reports/players`, {
           method: 'POST',
-          body: formData,
+          headers: jsonHeaders,
+          body: JSON.stringify(reportBody),
           identity
         })
 
