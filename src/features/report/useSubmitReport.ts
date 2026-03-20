@@ -35,7 +35,7 @@ function useSubmitReport(): UseSubmitReportResult {
         // Step 1: Get presigned URLs
         const presignBody: { files: PresignFile[] } = {
           files: formState.evidence.map(evidence => ({
-            filename: evidence.name,
+            filename: evidence.name.replace(/[^a-zA-Z0-9._-]/g, '-'),
             contentType: evidence.file.type,
             fileSize: evidence.size
           }))
