@@ -11,7 +11,7 @@ const web3Config = createWeb3CoreConfig({
   appMetadata: {
     name: 'Decentraland Report',
     description: 'Decentraland Report dApp',
-    url: typeof window !== 'undefined' ? window.location.origin : 'https://report.decentraland.org'
+    url: typeof window !== 'undefined' ? window.location.origin : 'https://decentraland.org/report'
   },
   additionalConnectors
 })

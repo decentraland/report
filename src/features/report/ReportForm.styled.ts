@@ -1,12 +1,15 @@
 import { Box, Button, Checkbox, FormControlLabel, Typography, styled } from 'decentraland-ui2'
 
+// eslint-disable-next-line import/no-unresolved
+import backgroundUrl from '/background.webp?url'
+
 const FormBackground = styled(Box)(({ theme }) => ({
   width: '100%',
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  backgroundImage: 'url(/background.png)',
+  backgroundImage: `url(${backgroundUrl})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',

@@ -1,4 +1,4 @@
-# Report UI
+# Report
 
 [![Coverage Status](https://coveralls.io/repos/github/decentraland/report/badge.svg?branch=main)](https://coveralls.io/github/decentraland/report?branch=main)
 
@@ -57,6 +57,8 @@ The UI uses the `@dcl/ui-env` module to configure the environment in which it th
 All of these different configurations are located under the `/src/config/env` directory, where a `json` file can be found for each environment.
 This package automatically loads the environment file for each site in production (zone, today, org) and can be configured to run on a different
 environment while live by using the `?env=` query parameter with the desired environment, i.e: `?env=prod`.
+
+The app is deployed under a path prefix at `decentraland.(org|zone|today)/report`.
 
 In order to configure the starting environment of the site in the development mode, copy the create a new `.env` file based on the `.default.env`.
 The `.default.env` also contains other variables that are usually modified at build time.
