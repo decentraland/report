@@ -6,7 +6,7 @@ import { getEnv } from '../config'
  * Returns '/report' on Decentraland production domains, empty string elsewhere (localhost, Vercel previews).
  */
 function getBasename(): string {
-  return /^decentraland.(zone|org|today)$/.test(window.location.host) ? '/report' : ''
+  return /^decentraland\.(zone|org|today)$/.test(window.location.host) ? '/report' : ''
 }
 
 /**
@@ -81,4 +81,4 @@ function redirectToAuth(path?: string, queryParams?: Record<string, string>): vo
   window.location.replace(`${authUrl}/login?redirectTo=${encodeURIComponent(redirectTo)}`)
 }
 
-export { buildAuthRedirectUrl, redirectToAuth }
+export { buildAuthRedirectUrl, getBasename, redirectToAuth }

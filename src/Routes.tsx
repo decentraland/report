@@ -6,14 +6,14 @@ function AppRoutes() {
   return (
     <Routes>
       <Route
-        path="/report/players"
+        path="/players"
         element={
           <PageLayout>
             <App />
           </PageLayout>
         }
       />
-      <Route path="*" element={<Navigate to="/report/players" replace />} />
+      <Route path="*" element={<Navigate to="/players" replace />} />
     </Routes>
   )
 }
