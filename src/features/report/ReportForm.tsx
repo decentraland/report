@@ -2,9 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useWallet } from '@dcl/core-web3'
 import { EthAddress } from '@dcl/schemas'
-import { FormControl, InputLabel, Logo, MenuItem, Select, TextField, Typography } from 'decentraland-ui2'
+import { FormControl, InputLabel, MenuItem, Select, TextField, Typography } from 'decentraland-ui2'
 import { FileUpload } from '../../components/FileUpload'
-import { FieldHelper, FieldWrapper, FormField } from '../../components/FormField'
+import { FieldInputGroup, FieldInputHint, FieldWrapper, FormField } from '../../components/FormField'
 import { useSubmitReport } from './useSubmitReport'
 import { REPORT_REASON_LABELS, ReportReason } from './ReportForm.types'
 import type { ReportFormErrors, ReportFormState, UploadedFile } from './ReportForm.types'
@@ -14,6 +14,7 @@ import {
   FooterText,
   FormBackground,
   FormCard,
+  FormLogo,
   FormTitle,
   LogoWrapper,
   SubmitButton,
@@ -89,8 +90,8 @@ function ReportForm() {
     <FormBackground>
       <FormCard>
         <LogoWrapper>
-          <Logo size="large" />
-          <FormTitle variant="h4">Report User</FormTitle>
+          <FormLogo size="large" />
+          <FormTitle variant="h3">Report User</FormTitle>
         </LogoWrapper>
 
         {walletMismatch && (
@@ -152,16 +153,18 @@ function ReportForm() {
           helper="Describe what happened. Include when and where the incident occurred if possible."
           error={submitted ? errors.description : undefined}
         >
-          <TextField
-            fullWidth
-            size="small"
-            multiline
-            rows={4}
-            placeholder="Write your description here..."
-            value={formState.description}
-            onChange={e => handleFieldChange('description', e.target.value)}
-          />
-          <FieldHelper>The more detail you provide, the easier it is for moderators to review your report.</FieldHelper>
+          <FieldInputGroup>
+            <TextField
+              fullWidth
+              size="small"
+              multiline
+              rows={4}
+              placeholder="Write your description here..."
+              value={formState.description}
+              onChange={e => handleFieldChange('description', e.target.value)}
+            />
+            <FieldInputHint>The more detail you provide, the easier it is for moderators to review your report.</FieldInputHint>
+          </FieldInputGroup>
         </FormField>
 
         <FormField
@@ -176,7 +179,8 @@ function ReportForm() {
 
         <FormField
           number={6}
-          label="Additional Comments (Optional)"
+          label="Additional Comments"
+          optional
           helper="Provide any extra information that might help moderators investigate."
         >
           <TextField

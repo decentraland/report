@@ -1,8 +1,17 @@
 import { Box, Button, styled } from 'decentraland-ui2'
 
 const AddFileButton = styled(Button)({
-  alignSelf: 'flex-start'
-})
+  alignSelf: 'flex-start',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '--mui-palette-secondary-main': '#43404A',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '--mui-palette-secondary-contrast': '#FFFFFF',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '&.MuiButton-sizeSmall.MuiButton-containedSecondary': {
+    padding: '6px 16px'
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any)
 
 const FileChip = styled(Box)(({ theme }) => ({
   display: 'flex',

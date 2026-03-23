@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, FormControlLabel, Typography, styled } from 'decentraland-ui2'
+import { Box, Button, Checkbox, FormControlLabel, Logo, Typography, styled } from 'decentraland-ui2'
 
 // eslint-disable-next-line import/no-unresolved
 import backgroundUrl from '/background.webp?url'
@@ -19,12 +19,11 @@ const FormBackground = styled(Box)(({ theme }) => ({
 const FormCard = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(22, 7, 35, 0.92)',
   borderRadius: theme.shape.borderRadius * 2,
-  padding: theme.spacing(5, 4),
-  maxWidth: 560,
-  width: '100%',
+  padding: theme.spacing(6, 8),
+  width: 608,
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(3),
+  gap: theme.spacing(6),
   // eslint-disable-next-line @typescript-eslint/naming-convention
   '& .MuiOutlinedInput-root': {
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -58,8 +57,13 @@ const FooterText = styled(Typography)(({ theme }) => ({
   }
 }))
 
+const FormLogo = styled(Logo)({
+  height: 64,
+  width: 64
+})
+
 const FormTitle = styled(Typography)({
-  fontWeight: 700,
+  fontWeight: 600,
   textAlign: 'center'
 })
 
@@ -67,7 +71,8 @@ const LogoWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: theme.spacing(4)
+  gap: theme.spacing(2),
+  marginBottom: theme.spacing(2)
 }))
 
 const SubmitButton = styled(Button)({
@@ -94,4 +99,15 @@ const ConfirmLabel = styled(FormControlLabel)(({ theme }) => ({
   }
 }))
 
-export { ConfirmCheckbox, ConfirmLabel, FooterText, FormBackground, FormCard, FormTitle, LogoWrapper, SubmitButton, WalletMismatchAlert }
+export {
+  ConfirmCheckbox,
+  ConfirmLabel,
+  FooterText,
+  FormBackground,
+  FormCard,
+  FormLogo,
+  FormTitle,
+  LogoWrapper,
+  SubmitButton,
+  WalletMismatchAlert
+}
