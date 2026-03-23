@@ -10,6 +10,7 @@ const AddFileButton = styled(Button)({
   '&.MuiButton-sizeSmall.MuiButton-containedSecondary': {
     padding: '6px 16px'
   }
+  // TODO: remove cast once MUI's styled() supports CSS custom property keys
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any)
 

@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react'
 
-interface FormFieldProps {
+type FormFieldBaseProps = {
   number: number
   label: string
-  optional?: boolean
-  required?: boolean
   helper: string
   error?: string
   children: ReactNode
 }
+
+type FormFieldProps = FormFieldBaseProps & ({ optional: true; required?: never } | { optional?: false; required?: boolean })
 
 export type { FormFieldProps }
