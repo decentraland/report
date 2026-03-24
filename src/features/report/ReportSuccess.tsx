@@ -1,7 +1,15 @@
+import { Navigate, useLocation } from 'react-router-dom'
 import { Typography } from 'decentraland-ui2'
 import { FormBackground, FormLogo, FormTitle, LogoWrapper, SuccessCard, SuccessTextGroup } from './ReportForm.styled'
 
 function ReportSuccess() {
+  const location = useLocation()
+  const submitted = (location.state as { submitted?: boolean })?.submitted
+
+  if (!submitted) {
+    return <Navigate to="/players" replace />
+  }
+
   return (
     <FormBackground justifyContent="center">
       <SuccessCard>
