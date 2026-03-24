@@ -21,7 +21,7 @@
     "lint:pkg": "npmPkgJsonLint ."
   },
   "dependencies": {
-    "@dcl/core-web3": "^0.4.0",
+    "@dcl/core-web3": "^0.5.0",
     "@dcl/hooks": "^1.2.0",
     "@dcl/schemas": "^25.2.0",
     "@dcl/single-sign-on-client": "0.1.0",
