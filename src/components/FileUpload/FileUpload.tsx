@@ -72,7 +72,7 @@ function FileUpload({ files, onFilesChange, error }: FileUploadProps) {
           ))}
         </FileChipsContainer>
       )}
-      <AddFileButton variant="contained" color="secondary" size="small" onClick={handleClick} disabled={files.length >= MAX_FILES}>
+      <AddFileButton variant="contained" color="secondary" size="medium" onClick={handleClick} disabled={files.length >= MAX_FILES}>
         Add File
       </AddFileButton>
       {sizeError && (

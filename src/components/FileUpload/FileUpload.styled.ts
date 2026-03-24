@@ -1,18 +1,8 @@
 import { Box, Button, styled } from 'decentraland-ui2'
 
 const AddFileButton = styled(Button)({
-  alignSelf: 'flex-start',
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  '--mui-palette-secondary-main': '#43404A',
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  '--mui-palette-secondary-contrast': '#FFFFFF',
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  '&.MuiButton-sizeSmall.MuiButton-containedSecondary': {
-    padding: '6px 16px'
-  }
-  // TODO: remove cast once MUI's styled() supports CSS custom property keys
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-} as any)
+  alignSelf: 'flex-start'
+})
 
 const FileChip = styled(Box)(({ theme }) => ({
   display: 'flex',
