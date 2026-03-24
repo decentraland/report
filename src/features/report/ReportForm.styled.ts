@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, FormControlLabel, Typography, styled } from 'decentraland-ui2'
+import { Box, Button, Checkbox, FormControlLabel, Logo, Typography, styled } from 'decentraland-ui2'
 
 // eslint-disable-next-line import/no-unresolved
 import backgroundUrl from '/background.webp?url'
@@ -19,12 +19,12 @@ const FormBackground = styled(Box)(({ theme }) => ({
 const FormCard = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(22, 7, 35, 0.92)',
   borderRadius: theme.shape.borderRadius * 2,
-  padding: theme.spacing(5, 4),
-  maxWidth: 560,
+  padding: theme.spacing(6, 8),
+  maxWidth: 608,
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(3),
+  gap: theme.spacing(6),
   // eslint-disable-next-line @typescript-eslint/naming-convention
   '& .MuiOutlinedInput-root': {
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -58,8 +58,13 @@ const FooterText = styled(Typography)(({ theme }) => ({
   }
 }))
 
+const FormLogo = styled(Logo)({
+  height: 64,
+  width: 64
+})
+
 const FormTitle = styled(Typography)({
-  fontWeight: 700,
+  fontWeight: 600,
   textAlign: 'center'
 })
 
@@ -67,12 +72,26 @@ const LogoWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: theme.spacing(4)
+  gap: theme.spacing(2),
+  marginBottom: theme.spacing(2)
 }))
 
 const SubmitButton = styled(Button)({
   alignSelf: 'flex-start'
 })
+
+const SuccessCard = styled(FormCard)(({ theme }) => ({
+  padding: theme.spacing(7, 9),
+  gap: theme.spacing(3)
+}))
+
+const SuccessTextGroup = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: theme.spacing(3),
+  textAlign: 'center'
+}))
 
 const WalletMismatchAlert = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(251, 59, 59, 0.16)',
@@ -94,4 +113,17 @@ const ConfirmLabel = styled(FormControlLabel)(({ theme }) => ({
   }
 }))
 
-export { ConfirmCheckbox, ConfirmLabel, FooterText, FormBackground, FormCard, FormTitle, LogoWrapper, SubmitButton, WalletMismatchAlert }
+export {
+  ConfirmCheckbox,
+  ConfirmLabel,
+  FooterText,
+  FormBackground,
+  FormCard,
+  FormLogo,
+  FormTitle,
+  LogoWrapper,
+  SuccessCard,
+  SubmitButton,
+  SuccessTextGroup,
+  WalletMismatchAlert
+}

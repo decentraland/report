@@ -9,8 +9,9 @@ const BulletCircle = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  fontSize: theme.typography.caption.fontSize,
-  fontWeight: theme.typography.fontWeightBold,
+  fontSize: 13,
+  fontWeight: 600,
+  lineHeight: '24px',
   flexShrink: 0
 }))
 
