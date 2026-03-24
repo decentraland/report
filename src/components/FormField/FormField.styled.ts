@@ -1,8 +1,8 @@
-import { Box, Typography, styled } from 'decentraland-ui2'
+import { Box, Typography, dclColors, styled } from 'decentraland-ui2'
 
 const FieldHelper = styled(Typography)(({ theme }) => ({
   ...theme.typography.body2,
-  color: '#A09BA8'
+  color: dclColors.neutral.gray3
 }))
 
 const FieldLabel = styled(Typography)(({ theme }) => ({
@@ -17,7 +17,7 @@ const FieldLabel = styled(Typography)(({ theme }) => ({
 }))
 
 const FieldOptionalMark = styled('span')({
-  color: '#A09BA8'
+  color: dclColors.neutral.gray3
 })
 
 const FieldInputGroup = styled(Box)({
@@ -28,7 +28,7 @@ const FieldInputGroup = styled(Box)({
 
 const FieldInputHint = styled(Typography)(({ theme }) => ({
   ...theme.typography.body2,
-  color: '#A09BA8',
+  color: dclColors.neutral.gray3,
   fontSize: '12px',
   marginLeft: '14px',
   marginRight: '14px'
