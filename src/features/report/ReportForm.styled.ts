@@ -80,6 +80,19 @@ const SubmitButton = styled(Button)({
   alignSelf: 'flex-start'
 })
 
+const SuccessCard = styled(FormCard)(({ theme }) => ({
+  padding: theme.spacing(7, 9),
+  gap: theme.spacing(3)
+}))
+
+const SuccessTextGroup = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: theme.spacing(3),
+  textAlign: 'center'
+}))
+
 const WalletMismatchAlert = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(251, 59, 59, 0.16)',
   border: `1px solid ${theme.palette.error.main}`,
@@ -109,6 +122,8 @@ export {
   FormLogo,
   FormTitle,
   LogoWrapper,
+  SuccessCard,
   SubmitButton,
+  SuccessTextGroup,
   WalletMismatchAlert
 }
