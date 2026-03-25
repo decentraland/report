@@ -2,9 +2,12 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useWallet } from '@dcl/core-web3'
 import { EthAddress } from '@dcl/schemas'
-import { FormControl, InputLabel, MenuItem, Select, TextField, Typography } from 'decentraland-ui2'
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from 'decentraland-ui2'
 import { FileUpload } from '../../components/FileUpload'
 import { FieldInputGroup, FieldInputHint, FieldWrapper, FormField } from '../../components/FormField'
+import { useAuthIdentity } from '../../hooks/useAuthIdentity'
+import { redirectToAuth } from '../../utils/authRedirect'
+import { useFormDraft } from './useFormDraft'
 import { useSubmitReport } from './useSubmitReport'
 import { REPORT_REASON_LABELS, ReportReason } from './ReportForm.types'
 import type { ReportFormErrors, ReportFormState, UploadedFile } from './ReportForm.types'
@@ -17,14 +20,37 @@ import {
   FormLogo,
   FormTitle,
   LogoWrapper,
+  SignInAlert,
   SubmitButton,
   WalletMismatchAlert
 } from './ReportForm.styled'
 
 function ReportForm() {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const { address } = useWallet()
+  const { hasValidIdentity } = useAuthIdentity()
+  const { saveDraft, restoreDraft, clearDraft } = useFormDraft()
+
+  // Restore draft form state after auth redirect
+  useEffect(() => {
+    const draft = restoreDraft()
+    if (!draft) return
+
+    // Restore search params if auth service stripped them
+    if (!searchParams.toString() && draft.searchParams) {
+      setSearchParams(new URLSearchParams(draft.searchParams), { replace: true })
+    }
+
+    // Restore form fields
+    setFormState(prev => ({
+      ...prev,
+      ...(draft.reportedAddress && !searchParams.get('reported_address') ? { reportedAddress: draft.reportedAddress } : {}),
+      reason: draft.reason,
+      description: draft.description,
+      additionalComments: draft.additionalComments
+    }))
+  }, [])
 
   const playerAddressParam = searchParams.get('player_address') ?? ''
   const reportedAddressParam = searchParams.get('reported_address') ?? ''
@@ -47,6 +73,12 @@ function ReportForm() {
   useEffect(() => {
     setFormState(prev => ({ ...prev, playerAddress: walletAddress }))
   }, [walletAddress])
+
+  useEffect(() => {
+    if (reportedAddressParam) {
+      setFormState(prev => ({ ...prev, reportedAddress: reportedAddressParam }))
+    }
+  }, [reportedAddressParam])
 
   const walletMismatch = useMemo(() => {
     if (!address || !playerAddressParam) return false
@@ -82,9 +114,10 @@ function ReportForm() {
     if (hasErrors || walletMismatch) return
     const success = await submitReport(formState)
     if (success) {
+      clearDraft()
       navigate('/success', { state: { submitted: true } })
     }
-  }, [hasErrors, walletMismatch, formState, submitReport, navigate])
+  }, [hasErrors, walletMismatch, formState, submitReport, navigate, clearDraft])
 
   return (
     <FormBackground>
@@ -109,6 +142,23 @@ function ReportForm() {
         >
           <TextField fullWidth size="small" placeholder="Write or paste your address here..." value={formState.playerAddress} disabled />
         </FormField>
+
+        {!hasValidIdentity && (
+          <SignInAlert>
+            Please sign in with your wallet to submit a report.
+            <Button
+              variant="text"
+              color="warning"
+              size="small"
+              onClick={() => {
+                saveDraft(formState, searchParams.toString())
+                redirectToAuth()
+              }}
+            >
+              Sign In
+            </Button>
+          </SignInAlert>
+        )}
 
         <FormField
           number={2}
@@ -162,6 +212,9 @@ function ReportForm() {
               placeholder="Write your description here..."
               value={formState.description}
               onChange={e => handleFieldChange('description', e.target.value)}
+              inputProps={{ maxLength: 500 }}
+              helperText={`${formState.description.length} / 500`}
+              FormHelperTextProps={{ sx: { textAlign: 'right' } }}
             />
             <FieldInputHint>The more detail you provide, the easier it is for moderators to review your report.</FieldInputHint>
           </FieldInputGroup>
@@ -191,6 +244,9 @@ function ReportForm() {
             placeholder="Write your comments here..."
             value={formState.additionalComments}
             onChange={e => handleFieldChange('additionalComments', e.target.value)}
+            inputProps={{ maxLength: 500 }}
+            helperText={`${formState.additionalComments.length} / 500`}
+            FormHelperTextProps={{ sx: { textAlign: 'right' } }}
           />
         </FormField>
 
@@ -224,7 +280,7 @@ function ReportForm() {
           onClick={handleSubmit}
           variant="contained"
           color="primary"
-          disabled={walletMismatch || !formState.confirmAccuracy || isSubmitting}
+          disabled={walletMismatch || !hasValidIdentity || !formState.confirmAccuracy || isSubmitting}
         >
           {isSubmitting ? 'Submitting...' : 'Submit Report'}
         </SubmitButton>

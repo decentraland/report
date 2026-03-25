@@ -31,7 +31,7 @@ function useAuthIdentity(): UseAuthIdentityResult {
 
   return {
     identity,
-    hasValidIdentity: Boolean(identity),
+    hasValidIdentity: !!identity && new Date(identity.expiration) > new Date(),
     address: walletAddress
   }
 }

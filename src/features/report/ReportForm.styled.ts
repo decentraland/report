@@ -102,6 +102,19 @@ const WalletMismatchAlert = styled(Box)(({ theme }) => ({
   ...theme.typography.body2
 }))
 
+const SignInAlert = styled(Box)(({ theme }) => ({
+  backgroundColor: 'rgba(237, 108, 2, 0.12)',
+  border: `1px solid ${theme.palette.warning.main}`,
+  borderRadius: theme.shape.borderRadius,
+  padding: theme.spacing(1.5, 2),
+  color: theme.palette.warning.main,
+  ...theme.typography.body2,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: theme.spacing(2)
+}))
+
 const ConfirmCheckbox = styled(Checkbox)<{ showError: boolean }>(({ theme, showError }) => ({
   color: showError ? theme.palette.error.main : undefined
 }))
@@ -122,6 +135,7 @@ export {
   FormLogo,
   FormTitle,
   LogoWrapper,
+  SignInAlert,
   SuccessCard,
   SubmitButton,
   SuccessTextGroup,
