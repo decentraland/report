@@ -6,6 +6,7 @@ const FORM_DRAFT_TTL_MS = 15 * 60 * 1000 // 15 minutes
 
 type FormDraft = {
   searchParams: string
+  reportedAddress: string
   reason: ReportFormState['reason']
   description: string
   additionalComments: string
@@ -16,6 +17,7 @@ function useFormDraft() {
   const saveDraft = useCallback((formState: ReportFormState, searchParams: string) => {
     const draft: FormDraft = {
       searchParams,
+      reportedAddress: formState.reportedAddress,
       reason: formState.reason,
       description: formState.description,
       additionalComments: formState.additionalComments,

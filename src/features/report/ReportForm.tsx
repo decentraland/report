@@ -45,6 +45,7 @@ function ReportForm() {
     // Restore form fields
     setFormState(prev => ({
       ...prev,
+      ...(draft.reportedAddress && !searchParams.get('reported_address') ? { reportedAddress: draft.reportedAddress } : {}),
       reason: draft.reason,
       description: draft.description,
       additionalComments: draft.additionalComments
@@ -116,7 +117,7 @@ function ReportForm() {
       clearDraft()
       navigate('/success', { state: { submitted: true } })
     }
-  }, [hasErrors, walletMismatch, formState, submitReport, navigate])
+  }, [hasErrors, walletMismatch, formState, submitReport, navigate, clearDraft])
 
   return (
     <FormBackground>
