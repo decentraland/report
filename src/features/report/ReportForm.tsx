@@ -211,6 +211,9 @@ function ReportForm() {
               placeholder="Write your description here..."
               value={formState.description}
               onChange={e => handleFieldChange('description', e.target.value)}
+              inputProps={{ maxLength: 500 }}
+              helperText={`${formState.description.length} / 500`}
+              FormHelperTextProps={{ sx: { textAlign: 'right' } }}
             />
             <FieldInputHint>The more detail you provide, the easier it is for moderators to review your report.</FieldInputHint>
           </FieldInputGroup>
@@ -240,6 +243,9 @@ function ReportForm() {
             placeholder="Write your comments here..."
             value={formState.additionalComments}
             onChange={e => handleFieldChange('additionalComments', e.target.value)}
+            inputProps={{ maxLength: 500 }}
+            helperText={`${formState.additionalComments.length} / 500`}
+            FormHelperTextProps={{ sx: { textAlign: 'right' } }}
           />
         </FormField>
 
