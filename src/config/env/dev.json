@@ -9,5 +9,6 @@
   "MANA_TOKEN_ADDRESS_ETHEREUM": "0xfa04d2e2ba9aec166c93dfeeba7427b2303befa9",
   "MANA_TOKEN_ADDRESS_MATIC": "0x7ad72b9f944ea9793cf4055d88f81138cc2c63a0",
   "SEGMENT_API_KEY": "",
-  "REPORT_API_URL": "https://report-user.decentraland.zone"
+  "REPORT_API_URL": "https://report-user.decentraland.zone",
+  "THIRDWEB_CLIENT_ID": "e1adce863fe287bb6cf0e3fd90bdb77f"
 }

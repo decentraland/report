@@ -21,7 +21,7 @@
     "lint:pkg": "npmPkgJsonLint ."
   },
   "dependencies": {
-    "@dcl/core-web3": "^0.5.0",
+    "@dcl/core-web3": "^0.7.0",
     "@dcl/hooks": "^1.2.0",
     "@dcl/schemas": "^25.2.0",
     "@dcl/single-sign-on-client": "0.1.0",
@@ -37,6 +37,7 @@
     "react-redux": "9.2.0",
     "react-router-dom": "7.13.0",
     "redux": "5.0.1",
+    "thirdweb": "^5.119.0",
     "viem": "2.41.2",
     "wagmi": "2.19.5"
   },
@@ -91,6 +92,7 @@
     "@walletconnect/logger": {
       "pino": "10.0.0"
     },
+    "magic-sdk": "$magic-sdk",
     "react-redux": "$react-redux",
     "redux": "$redux",
     "utf-8-validate": "^6.0.6"
