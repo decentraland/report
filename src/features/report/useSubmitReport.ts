@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
+import { useAuthIdentity } from '@dcl/core-web3'
 import { signedFetchFactory } from 'decentraland-crypto-fetch'
 import { getEnv } from '../../config'
-import { useAuthIdentity } from '../../hooks/useAuthIdentity'
 import { REPORT_REASON_LABELS, type ReportFormState } from './ReportForm.types'
 
 type PresignFile = { filename: string; contentType: string; fileSize: number }
